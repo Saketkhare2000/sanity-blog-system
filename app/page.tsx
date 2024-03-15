@@ -5,6 +5,7 @@ import { client, urlFor } from "./lib/sanity";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import Link from "next/link";
+import Head from "next/head";
 
 async function getPosts() {
     const query = `*[_type=='post'] | order(_createdAt asc){
@@ -22,6 +23,13 @@ async function getPosts() {
 export default async function Home() {
     const data = await getPosts();
 
+    <Head>
+        <title>Blog</title>
+        <meta name="description" content="Blog" />
+        {/* //Og Image */}
+        <meta property="og:title" content="Blog" />
+        <meta property="og:description" content="Blog" />
+    </Head>;
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-10">
             {data.map((post) => (

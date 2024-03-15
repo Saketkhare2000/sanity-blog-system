@@ -1,6 +1,7 @@
 import { PostData } from "@/app/lib/interface";
 import { client, urlFor } from "@/app/lib/sanity";
 import { PortableText } from "@portabletext/react";
+import Head from "next/head";
 import Image from "next/image";
 
 async function getPostData(slug: string) {
@@ -19,6 +20,18 @@ async function getPostData(slug: string) {
 
 export default async function Blog({ params }: { params: { slug: string } }) {
     const data = await getPostData(params.slug);
+
+    <Head>
+        <title>{data.title}</title>
+        <meta name="description" content={data.title} />
+        {/* //Og Image */}
+        <meta property="og:title" content={data.title} />
+        <meta property="og:description" content={data.title} />
+        <meta
+            property="og:image"
+            content={urlFor(data.mainImage).url() as string}
+        />
+    </Head>;
 
     const portableTextComponents = {
         types: {
