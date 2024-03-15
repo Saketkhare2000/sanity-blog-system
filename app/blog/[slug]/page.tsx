@@ -3,7 +3,7 @@ import { client, urlFor } from "@/app/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 
-export async function getPostData(slug: string) {
+async function getPostData(slug: string) {
     const query = `*[_type=='post' && slug.current =='${slug}'] | order(_createdAt asc){
         "mainImage":mainImage.asset._ref,
         "currentSlug":slug.current,
